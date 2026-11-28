@@ -1,720 +1,164 @@
-
-Aperolhotel<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
 <title>Aperol Hotel — Оставьте отзыв</title>
 <meta name="description" content="Оцените ваше пребывание в Aperol Hotel. Выберите карту и оставьте отзыв.">
 <meta name="theme-color" content="#f5efe6">
-
 <link rel="icon" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
-
 <meta property="og:title" content="Aperol Hotel — Оставьте отзыв">
 <meta property="og:description" content="Ваш отзыв помогает нам становиться лучше.">
 <meta property="og:image" content="logo.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
-
-:root{
-  --bg:#f5efe6;
-  --bg2:#eee3d2;
-  --ink:#3b3027;
-  --dark:#2d241e;
-  --mid:#8b7764;
-  --line:#d8c9b6;
-  --soft:#e8dac8;
-  --cream:#fffaf3;
-  --gold:#b99b72;
-  --ease:cubic-bezier(.22,.8,.2,1);
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at 20% 10%,rgba(255,255,255,.8),transparent 32%),
-    radial-gradient(circle at 85% 80%,rgba(210,185,150,.22),transparent 36%),
-    var(--bg);
-  min-height:100vh;
-  overflow-x:hidden;
-  position:relative;
-  -webkit-font-smoothing:antialiased;
-}
+:root{--bg:#f5efe6;--bg2:#eee3d2;--ink:#3b3027;--dark:#2d241e;--mid:#8b7764;--line:#d8c9b6;--soft:#e8dac8;--cream:#fffaf3;--gold:#b99b72;--ease:cubic-bezier(.22,.8,.2,1);}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 20% 10%,rgba(255,255,255,.8),transparent 32%),radial-gradient(circle at 85% 80%,rgba(210,185,150,.22),transparent 36%),var(--bg);min-height:100vh;overflow-x:hidden;position:relative;-webkit-font-smoothing:antialiased;}
 
 /* ---------- Soft beige lights ---------- */
-
-.light{
-  position:fixed;
-  z-index:0;
-  pointer-events:none;
-  border-radius:50%;
-  background:radial-gradient(
-    circle,
-    rgba(181,145,103,.16),
-    transparent 68%
-  );
-  filter:blur(35px);
-}
-
-.l1{
-  width:520px;
-  height:520px;
-  top:-200px;
-  left:-160px;
-  animation:drift1 22s ease-in-out infinite;
-}
-
-.l2{
-  width:460px;
-  height:460px;
-  bottom:-180px;
-  right:-160px;
-  animation:drift2 26s ease-in-out infinite;
-}
-
-@keyframes drift1{
-  0%,100%{
-    transform:translate(0,0)
-  }
-
-  50%{
-    transform:translate(120px,90px)
-  }
-}
-
-@keyframes drift2{
-  0%,100%{
-    transform:translate(0,0)
-  }
-
-  50%{
-    transform:translate(-110px,-80px)
-  }
-}
+.light{position:fixed;z-index:0;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(181,145,103,.16),transparent 68%);filter:blur(35px);}
+.l1{width:520px;height:520px;top:-200px;left:-160px;animation:drift1 22s ease-in-out infinite;}
+.l2{width:460px;height:460px;bottom:-180px;right:-160px;animation:drift2 26s ease-in-out infinite;}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(120px,90px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-110px,-80px)}}
 
 /* ---------- Tiny decorative details ---------- */
-
-.micro{
-  position:fixed;
-  z-index:1;
-  pointer-events:none;
-  color:rgba(137,108,76,.35);
-  font-size:9px;
-  letter-spacing:.3em;
-}
-
-.micro.m1{
-  top:105px;
-  left:22px;
-}
-
-.micro.m2{
-  top:50%;
-  right:18px;
-  writing-mode:vertical-rl;
-}
-
-.micro.m3{
-  bottom:100px;
-  left:24px;
-}
-
-.micro::before{
-  content:"";
-  display:inline-block;
-  width:18px;
-  height:1px;
-  background:currentColor;
-  vertical-align:middle;
-  margin-right:7px;
-}
+.micro{position:fixed;z-index:1;pointer-events:none;color:rgba(137,108,76,.35);font-size:9px;letter-spacing:.3em;}
+.micro.m1{top:105px;left:22px;}
+.micro.m2{top:50%;right:18px;writing-mode:vertical-rl;}
+.micro.m3{bottom:100px;left:24px;}
+.micro::before{content:"";display:inline-block;width:18px;height:1px;background:currentColor;vertical-align:middle;margin-right:7px;}
 
 /* ---------- Layout ---------- */
-
-.wrap{
-  position:relative;
-  z-index:2;
-  max-width:480px;
-  margin:0 auto;
-  padding:22px 24px 150px;
-}
+.wrap{position:relative;z-index:2;max-width:480px;margin:0 auto;padding:22px 24px 150px;}
 
 /* ---------- Language ---------- */
-
-.lang{
-  display:flex;
-  justify-content:flex-end;
-  gap:2px;
-  font-size:12px;
-  letter-spacing:.12em;
-  font-weight:500;
-}
-
-.lang button{
-  background:none;
-  border:0;
-  color:var(--mid);
-  font:inherit;
-  letter-spacing:inherit;
-  padding:8px 9px;
-  cursor:pointer;
-  position:relative;
-  transition:color .3s;
-}
-
-.lang button::after{
-  content:"";
-  position:absolute;
-  left:9px;
-  right:9px;
-  bottom:4px;
-  height:1px;
-  background:var(--ink);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .5s var(--ease);
-}
-
-.lang button.on{
-  color:var(--ink);
-}
-
-.lang button.on::after{
-  transform:scaleX(1);
-}
+.lang{display:flex;justify-content:flex-end;gap:2px;font-size:12px;letter-spacing:.12em;font-weight:500;}
+.lang button{background:none;border:0;color:var(--mid);font:inherit;letter-spacing:inherit;padding:8px 9px;cursor:pointer;position:relative;transition:color .3s;}
+.lang button::after{content:"";position:absolute;left:9px;right:9px;bottom:4px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+.lang button.on{color:var(--ink);}
+.lang button.on::after{transform:scaleX(1);}
 
 /* ---------- Reveal ---------- */
-
-.rv{
-  opacity:0;
-  transform:translateY(22px);
-  animation:rv 1.1s var(--ease) forwards;
-  animation-delay:calc(var(--i,0)*.11s + .1s);
-}
-
-@keyframes rv{
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
+.rv{opacity:0;transform:translateY(22px);animation:rv 1.1s var(--ease) forwards;animation-delay:calc(var(--i,0)*.11s + .1s);}
+@keyframes rv{to{opacity:1;transform:none;}}
 
 /* ---------- Hero ---------- */
-
-.hero{
-  text-align:center;
-  padding:36px 0 6px;
-}
-
-.mark{
-  position:relative;
-  width:132px;
-  height:132px;
-  margin:0 auto 34px;
-}
-
-.mark svg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  transform:rotate(-90deg);
-}
-
-.mark circle{
-  fill:none;
-  stroke:var(--gold);
-  stroke-width:1;
-}
-
-.mark .r1{
-  stroke-dasharray:408;
-  stroke-dashoffset:408;
-  animation:draw 2.4s var(--ease) .3s forwards;
-}
-
-.mark .r2{
-  stroke:var(--line);
-  transform-origin:center;
-  animation:breathe 5s ease-in-out infinite;
-}
-
-@keyframes draw{
-  to{
-    stroke-dashoffset:0;
-  }
-}
-
-@keyframes breathe{
-  0%,100%{
-    transform:scale(1);
-    opacity:1;
-  }
-
-  50%{
-    transform:scale(1.07);
-    opacity:.4;
-  }
-}
+.hero{text-align:center;padding:12px 0 0;}
+.mark{position:relative;width:132px;height:132px;margin:0 auto 24px;}
+.mark svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);}
+.mark circle{fill:none;stroke:var(--gold);stroke-width:1;}
+.mark .r1{stroke-dasharray:408;stroke-dashoffset:408;animation:draw 2.4s var(--ease) .3s forwards;}
+.mark .r2{stroke:var(--line);transform-origin:center;animation:breathe 5s ease-in-out infinite;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.07);opacity:.4;}}
 
 /* ---------- Logo ---------- */
-
-.mark .in{
-  position:absolute;
-  inset:16px;
-  border-radius:50%;
-  background:var(--cream);
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-
-  box-shadow:
-    0 14px 35px -16px rgba(95,65,35,.35),
-    inset 0 0 0 1px rgba(184,155,115,.2);
-}
-
-.mark img{
-  width:78%;
-  height:78%;
-  object-fit:contain;
-  display:block;
-}
+.mark .in{position:absolute;inset:16px;border-radius:50%;background:var(--cream);display:grid;place-items:center;overflow:hidden;font:italic 600 46px 'Cormorant Garamond',serif;color:var(--gold);box-shadow:0 14px 35px -16px rgba(95,65,35,.35),inset 0 0 0 1px rgba(184,155,115,.2);}
+.mark img{width:78%;height:78%;object-fit:contain;display:block;}
 
 /* ---------- Typography ---------- */
-
-.eyebrow{
-  font-size:11px;
-  letter-spacing:.34em;
-  text-transform:uppercase;
-  color:var(--mid);
-  font-weight:500;
-  padding-left:.34em;
-}
-
-h1{
-  font:500 clamp(54px,16vw,76px)/.95 'Cormorant Garamond',serif;
-  letter-spacing:-.01em;
-  margin:16px 0 4px;
-  color:var(--dark);
-}
-
-h1 em{
-  display:block;
-  font-style:italic;
-  font-weight:500;
-  font-size:.46em;
-  letter-spacing:.02em;
-  color:var(--mid);
-  margin-top:8px;
-}
-
-.sub{
-  color:var(--mid);
-  font-size:14.5px;
-  line-height:1.65;
-  max-width:340px;
-  margin:20px auto 0;
-}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--mid);font-weight:500;padding-left:.34em;}
+h1{font:500 clamp(54px,16vw,76px)/.95 'Cormorant Garamond',serif;letter-spacing:-.01em;margin:16px 0 4px;color:var(--dark);}
+h1 em{display:block;font-style:italic;font-weight:500;font-size:.46em;letter-spacing:.02em;color:var(--mid);margin-top:8px;}
+.sub{color:var(--mid);font-size:14.5px;line-height:1.65;max-width:340px;margin:20px auto 0;}
 
 /* ---------- Decorative line ---------- */
+.decor-line{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:25px;}
+.decor-line span{display:block;width:4px;height:4px;border:1px solid var(--gold);transform:rotate(45deg);}
+.decor-line::before,.decor-line::after{content:"";width:34px;height:1px;background:var(--line);}
 
-.decor-line{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin-top:25px;
-}
+/* ---------- Offer ---------- */
+.offer{max-width:340px;margin:22px auto 0;font:500 25px/1.25 'Cormorant Garamond',serif;color:var(--dark);}
+.offer span{display:block;}
+.offer strong{display:inline-block;margin-top:14px;padding:10px 22px;border:1px solid var(--gold);border-radius:999px;background:var(--cream);font:600 15px 'Inter',sans-serif;letter-spacing:.02em;}
 
-.decor-line span{
-  display:block;
-  width:4px;
-  height:4px;
-  border:1px solid var(--gold);
-  transform:rotate(45deg);
-}
+/* ---------- Telegram promo ---------- */
+.promo{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:32px;padding:28px 22px;border-radius:24px;background:var(--dark);color:#fff;text-decoration:none;box-shadow:0 22px 40px -22px rgba(72,48,27,.6);}
+.promo .ic{width:48px;height:48px;border-radius:50%;border:1px solid rgba(185,155,114,.6);display:grid;place-items:center;}
+.promo .ic svg{width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.promo b{margin-top:14px;font:600 30px/1.15 'Cormorant Garamond',serif;}
+.promo .pt{margin-top:8px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);}
+.promo .btn{margin-top:18px;padding:13px 30px;border-radius:999px;background:var(--cream);color:var(--dark);font-size:13px;font-weight:600;}
 
-.decor-line::before,
-.decor-line::after{
-  content:"";
-  width:34px;
-  height:1px;
-  background:var(--line);
-}
+/* ---------- Location ---------- */
+.loc{margin-top:14px;padding:30px 22px;text-align:center;background:var(--cream);border:1px solid var(--line);border-radius:24px;}
+.loc .pin svg{width:30px;height:30px;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;}
+.loc .addr{margin-top:10px;font:600 26px/1.2 'Cormorant Garamond',serif;color:var(--dark);}
+.loc .city{margin-top:4px;font-size:13px;color:var(--mid);}
+.loc .lm-title{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mid);font-weight:500;}
+.loc ul{list-style:none;margin-top:8px;}
+.loc li{padding:7px 0;font-size:14.5px;}
+.loc .route{display:inline-block;margin-top:18px;padding:14px 30px;border-radius:999px;background:var(--dark);color:#fff;text-decoration:none;font-size:13px;font-weight:600;}
 
 /* ---------- Section label ---------- */
-
-.label{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin:46px 0 6px;
-  font-size:11px;
-  letter-spacing:.26em;
-  text-transform:uppercase;
-  color:var(--mid);
-  font-weight:500;
-}
-
-.label::after{
-  content:"";
-  flex:1;
-  height:1px;
-  background:var(--line);
-}
+.label{display:flex;align-items:center;gap:14px;margin:46px 0 6px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mid);font-weight:500;}
+.label::after{content:"";flex:1;height:1px;background:var(--line);}
 
 /* ---------- Map rows ---------- */
-
-.rows{
-  border-top:1px solid var(--line);
-  margin-top:14px;
-}
-
-.row{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  text-decoration:none;
-  color:var(--ink);
-  padding:22px 4px;
-  border-bottom:1px solid var(--line);
-  overflow:hidden;
-  isolation:isolate;
-
-  transition:
-    padding .6s var(--ease),
-    color .5s var(--ease);
-}
-
-.row::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:var(--dark);
-  transform:scaleY(0);
-  transform-origin:bottom;
-  transition:transform .6s var(--ease);
-  z-index:-1;
-}
-
-.row .n{
-  font:italic 500 16px 'Cormorant Garamond',serif;
-  color:var(--mid);
-  width:26px;
-  transition:color .5s;
-}
-
-.row .t{
-  flex:1;
-  min-width:0;
-}
-
-.row b{
-  display:block;
-  font:500 28px/1.1 'Cormorant Garamond',serif;
-  letter-spacing:.005em;
-}
-
-.row small{
-  display:block;
-  margin-top:5px;
-  font-size:12.5px;
-  color:var(--mid);
-  transition:color .5s;
-}
-
-.row .ar{
-  width:44px;
-  height:44px;
-  border:1px solid var(--line);
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  flex:none;
-  transition:.6s var(--ease);
-}
-
-.row .ar svg{
-  width:16px;
-  height:16px;
-  stroke:currentColor;
-  fill:none;
-  stroke-width:1.5;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  transition:transform .6s var(--ease);
-}
-
-.row:hover,
-.row:active{
-  color:#fff;
-  padding-left:18px;
-  padding-right:14px;
-}
-
-.row:hover::before,
-.row:active::before{
-  transform:scaleY(1);
-}
-
-.row:hover .n,
-.row:hover small,
-.row:active .n,
-.row:active small{
-  color:rgba(255,255,255,.65);
-}
-
-.row:hover .ar,
-.row:active .ar{
-  border-color:rgba(255,255,255,.4);
-}
-
-.row:hover .ar svg,
-.row:active .ar svg{
-  transform:rotate(-45deg);
-}
+.rows{border-top:1px solid var(--line);margin-top:14px;}
+.row{position:relative;display:flex;align-items:center;gap:18px;text-decoration:none;color:var(--ink);padding:22px 4px;border-bottom:1px solid var(--line);overflow:hidden;isolation:isolate;transition:padding .6s var(--ease),color .5s var(--ease);}
+.row::before{content:"";position:absolute;inset:0;background:var(--dark);transform:scaleY(0);transform-origin:bottom;transition:transform .6s var(--ease);z-index:-1;}
+.row .n{font:italic 500 16px 'Cormorant Garamond',serif;color:var(--mid);width:26px;transition:color .5s;}
+.row .t{flex:1;min-width:0;}
+.row b{display:block;font:500 28px/1.1 'Cormorant Garamond',serif;letter-spacing:.005em;}
+.row small{display:block;margin-top:5px;font-size:12.5px;color:var(--mid);transition:color .5s;}
+.row .ar{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;flex:none;transition:.6s var(--ease);}
+.row .ar svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .6s var(--ease);}
+.row:hover,.row:active{color:#fff;padding-left:18px;padding-right:14px;}
+.row:hover::before,.row:active::before{transform:scaleY(1);}
+.row:hover .n,.row:hover small,.row:active .n,.row:active small{color:rgba(255,255,255,.65);}
+.row:hover .ar,.row:active .ar{border-color:rgba(255,255,255,.4);}
+.row:hover .ar svg,.row:active .ar svg{transform:rotate(-45deg);}
 
 /* ---------- Hint ---------- */
-
-.hint{
-  margin-top:20px;
-  font-size:12.5px;
-  line-height:1.65;
-  color:var(--mid);
-  text-align:center;
-}
+.hint{margin-top:20px;font-size:12.5px;line-height:1.65;color:var(--mid);text-align:center;}
 
 /* ---------- Contacts ---------- */
-
-.links{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0;
-  border-top:1px solid var(--line);
-  margin-top:14px;
-}
-
-.lk{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:20px 4px;
-  text-decoration:none;
-  color:var(--ink);
-  font-size:14px;
-  font-weight:500;
-  border-bottom:1px solid var(--line);
-  position:relative;
-}
-
-.lk:nth-child(odd){
-  border-right:1px solid var(--line);
-  padding-right:10px;
-}
-
-.lk:nth-child(even){
-  padding-left:20px;
-}
-
-.lk svg{
-  width:20px;
-  height:20px;
-  flex:none;
-  stroke:var(--ink);
-  fill:none;
-  stroke-width:1.4;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  transition:transform .5s var(--ease);
-}
-
-.lk span{
-  position:relative;
-}
-
-.lk span::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-3px;
-  height:1px;
-  background:var(--gold);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .5s var(--ease);
-}
-
-.lk:hover svg,
-.lk:active svg{
-  transform:translateY(-3px);
-}
-
-.lk:hover span::after,
-.lk:active span::after{
-  transform:scaleX(1);
-}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);margin-top:14px;}
+.lk{display:flex;align-items:center;gap:12px;padding:20px 4px;text-decoration:none;color:var(--ink);font-size:14px;font-weight:500;border-bottom:1px solid var(--line);position:relative;}
+.lk:nth-child(odd){border-right:1px solid var(--line);padding-right:10px;}
+.lk:nth-child(even){padding-left:20px;}
+.lk svg{width:20px;height:20px;flex:none;stroke:var(--ink);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s var(--ease);}
+.lk span{position:relative;}
+.lk span::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);}
+.lk:hover svg,.lk:active svg{transform:translateY(-3px);}
+.lk:hover span::after,.lk:active span::after{transform:scaleX(1);}
 
 /* ---------- Thanks ---------- */
-
-.thanks{
-  text-align:center;
-  margin-top:56px;
-  font:italic 500 30px/1.2 'Cormorant Garamond',serif;
-  color:var(--dark);
-}
-
-.thanks small{
-  display:block;
-  margin-top:14px;
-  font:500 10.5px 'Inter';
-  letter-spacing:.34em;
-  text-transform:uppercase;
-  color:var(--mid);
-}
+.thanks{text-align:center;margin-top:56px;font:italic 500 30px/1.2 'Cormorant Garamond',serif;color:var(--dark);}
+.thanks small{display:block;margin-top:14px;font:500 10.5px 'Inter';letter-spacing:.34em;text-transform:uppercase;color:var(--mid);}
 
 /* ---------- Sticky call ---------- */
-
-.call{
-  position:fixed;
-  z-index:5;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:max(20px,env(safe-area-inset-bottom));
-
-  display:flex;
-  align-items:center;
-  gap:10px;
-
-  text-decoration:none;
-  color:#fff;
-  background:var(--dark);
-
-  font-size:13px;
-  font-weight:500;
-  letter-spacing:.04em;
-
-  padding:16px 26px;
-  border-radius:999px;
-
-  white-space:nowrap;
-
-  box-shadow:
-    0 14px 36px -12px rgba(72,48,27,.55);
-
-  opacity:0;
-  animation:rv 1s var(--ease) 1.4s forwards;
-
-  transition:box-shadow .4s;
-}
-
-.call::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  border:1px solid rgba(190,160,120,.8);
-  animation:ring 3.2s ease-out infinite;
-}
-
-.call svg{
-  width:16px;
-  height:16px;
-  stroke:#fff;
-  fill:none;
-  stroke-width:1.7;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-@keyframes ring{
-  0%{
-    transform:scale(1);
-    opacity:.5;
-  }
-
-  100%{
-    transform:scale(1.35,1.9);
-    opacity:0;
-  }
-}
+.call{position:fixed;z-index:5;left:50%;transform:translateX(-50%);bottom:max(20px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;background:var(--dark);font-size:13px;font-weight:500;letter-spacing:.04em;padding:16px 26px;border-radius:999px;white-space:nowrap;box-shadow:0 14px 36px -12px rgba(72,48,27,.55);opacity:0;animation:callIn 1s var(--ease) 1.4s forwards;transition:box-shadow .4s;}
+@keyframes callIn{from{opacity:0;transform:translate(-50%,22px);}to{opacity:1;transform:translate(-50%,0);}}
+.call::before{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid rgba(190,160,120,.8);animation:ring 3.2s ease-out infinite;}
+.call svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+@keyframes ring{0%{transform:scale(1);opacity:.5;}100%{transform:scale(1.35,1.9);opacity:0;}}
 
 /* ---------- Mobile ---------- */
-
 @media(max-width:420px){
-
-  .wrap{
-    padding-left:20px;
-    padding-right:20px;
-  }
-
-  .mark{
-    width:120px;
-    height:120px;
-  }
-
-  h1{
-    font-size:62px;
-  }
-
-  .row b{
-    font-size:26px;
-  }
-
-  .micro{
-    display:none;
-  }
-
+  .wrap{padding-left:20px;padding-right:20px;}
+  .mark{width:120px;height:120px;}
+  h1{font-size:62px;}
+  .row b{font-size:26px;}
+  .micro{display:none;}
 }
 
 /* ---------- Reduced motion ---------- */
-
 @media(prefers-reduced-motion:reduce){
-
-  *{
-    animation:none!important;
-    transition:none!important;
-  }
-
-  .rv,
-  .call{
-    opacity:1!important;
-    transform:none!important;
-  }
-
-  .call{
-    transform:translateX(-50%)!important;
-  }
-
-  .mark .r1{
-    stroke-dashoffset:0;
-  }
-
+  *{animation:none!important;transition:none!important;}
+  .rv,.call{opacity:1!important;transform:none!important;}
+  .call{transform:translateX(-50%)!important;}
+  .mark .r1{stroke-dashoffset:0;}
 }
-
 </style>
 </head>
-
 <body>
 
 <div class="light l1"></div>
@@ -727,359 +171,130 @@ h1 em{
 <main class="wrap">
 
   <div class="lang rv" id="lang" style="--i:0">
-
     <button data-l="ru">RU</button>
     <button data-l="uz">UZ</button>
     <button data-l="en">EN</button>
-
   </div>
-
 
   <section class="hero">
-
     <div class="mark rv" style="--i:1">
-
       <svg viewBox="0 0 132 132">
-
-        <circle
-          class="r2"
-          cx="66"
-          cy="66"
-          r="64.5"
-        />
-
-        <circle
-          class="r1"
-          cx="66"
-          cy="66"
-          r="65"
-        />
-
+        <circle class="r2" cx="66" cy="66" r="64.5"/>
+        <circle class="r1" cx="66" cy="66" r="65"/>
       </svg>
-
-
       <!-- ТВОЙ LOGO.PNG -->
-
       <div class="in">
-
-        <img
-          src="logo.png"
-          alt="Aperol Hotel"
-        >
-
+        <img src="logo.png" alt="Aperol Hotel" onerror="this.parentNode.textContent='A'">
       </div>
-
     </div>
 
+    <div class="eyebrow rv" style="--i:2" data-t="eyebrow">Добро пожаловать</div>
 
-    <div
-      class="eyebrow rv"
-      style="--i:2"
-      data-t="eyebrow"
-    >
-      Добро пожаловать
-    </div>
+    <h1 class="rv" style="--i:3">Aperol<em>Hotel</em></h1>
 
-
-    <h1 class="rv" style="--i:3">
-
-      Aperol
-
-      <em>Hotel</em>
-
-    </h1>
-
-
-    <p
-      class="sub rv"
-      style="--i:4"
-      data-t="sub"
-    >
-      Расскажите о вашем отдыхе. Ваш отзыв помогает нам становиться лучше, а другим гостям — выбирать нас.
+    <p class="offer rv" style="--i:4">
+      <span data-t="offer">Комфортные номера для деловых поездок и отдыха вдвоём</span>
+      <strong data-t="price">от 250 000 сум</strong>
     </p>
 
-
-    <div class="decor-line rv" style="--i:4.5">
-      <span></span>
-    </div>
-
+    <div class="decor-line rv" style="--i:4.5"><span></span></div>
   </section>
 
+  <a class="promo rv" style="--i:5" href="https://t.me/aperolhotel" target="_blank" rel="noopener">
+    <span class="ic"><svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.6l6.1 2.3 2.3 6.9 3.4-4.2 5 3.7L21.5 3ZM8.6 12.9l9.6-6.4"/></svg></span>
+    <b data-t="promo_title">Получайте скидки</b>
+    <span class="pt" data-t="promo_text">Подпишитесь на наш Telegram-канал</span>
+    <span class="btn" data-t="promo_btn">Подписаться</span>
+  </a>
 
-  <div
-    class="label rv"
-    style="--i:5"
-    data-t="step1"
-  >
-    Выберите карту
-  </div>
+  <div class="label rv" style="--i:6" data-t="step2">Связаться с нами</div>
 
+  <section class="links rv" style="--i:7">
+    <a class="lk" href="tel:+998908292022">
+      <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+      <span data-t="c_call">Ресепшен</span>
+    </a>
+    <a class="lk" href="https://t.me/aperolhotel" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21.5 3 2.5 10.6l6.1 2.3 2.3 6.9 3.4-4.2 5 3.7L21.5 3ZM8.6 12.9l9.6-6.4"/></svg>
+      <span>Telegram</span>
+    </a>
+    <a class="lk" href="https://www.instagram.com/aperol.hotel/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>
+      <span>Instagram</span>
+    </a>
+    <a class="lk" href="https://aperol-hotel.uz" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20"/><path d="M12 2a15 15 0 0 0 0 20"/></svg>
+      <span data-t="c_site">Сайт</span>
+    </a>
+  </section>
 
-  <section
-    class="rows rv"
-    style="--i:6"
-  >
+  <div class="label rv" style="--i:8" data-t="step1">Выберите карту</div>
 
-    <a
-      class="row"
-      href="https://yandex.uz/maps/-/CXWRUVnD"
-      target="_blank"
-      rel="noopener"
-    >
+  <p class="sub rv" style="--i:8" data-t="sub">Расскажите о вашем отдыхе. Ваш отзыв помогает нам становиться лучше, а другим гостям — выбирать нас.</p>
 
+  <section class="rows rv" style="--i:9">
+    <a class="row" href="https://yandex.uz/maps/-/CXWRUVnD" target="_blank" rel="noopener">
       <span class="n">01</span>
-
-      <span class="t">
-
-        <b>Яндекс Карты</b>
-
-        <small data-t="small">
-          Оставить отзыв
-        </small>
-
-      </span>
-
-      <span class="ar">
-
-        <svg viewBox="0 0 24 24">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-
-      </span>
-
+      <span class="t"><b>Яндекс Карты</b><small data-t="small">Оставить отзыв</small></span>
+      <span class="ar"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
-
-
-    <a
-      class="row"
-      href="https://go.2gis.com/8Z0zx"
-      target="_blank"
-      rel="noopener"
-    >
-
+    <a class="row" href="https://go.2gis.com/8Z0zx" target="_blank" rel="noopener">
       <span class="n">02</span>
-
-      <span class="t">
-
-        <b>2GIS</b>
-
-        <small data-t="small">
-          Оставить отзыв
-        </small>
-
-      </span>
-
-      <span class="ar">
-
-        <svg viewBox="0 0 24 24">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-
-      </span>
-
+      <span class="t"><b>2GIS</b><small data-t="small">Оставить отзыв</small></span>
+      <span class="ar"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
-
-
-    <a
-      class="row"
-      href="https://maps.app.goo.gl/c4mFQvZe5sb9vAqUA"
-      target="_blank"
-      rel="noopener"
-    >
-
+    <a class="row" href="https://maps.app.goo.gl/c4mFQvZe5sb9vAqUA" target="_blank" rel="noopener">
       <span class="n">03</span>
-
-      <span class="t">
-
-        <b>Google Maps</b>
-
-        <small data-t="small">
-          Оставить отзыв
-        </small>
-
-      </span>
-
-      <span class="ar">
-
-        <svg viewBox="0 0 24 24">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-
-      </span>
-
+      <span class="t"><b>Google Maps</b><small data-t="small">Оставить отзыв</small></span>
+      <span class="ar"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
-
   </section>
 
+  <p class="hint rv" style="--i:10" data-t="hint">Откроется страница отеля на карте — нажмите «Оставить отзыв» и поставьте оценку.</p>
 
-  <p
-    class="hint rv"
-    style="--i:7"
-    data-t="hint"
-  >
-    Откроется страница отеля на карте — нажмите «Оставить отзыв» и поставьте оценку.
-  </p>
+  <div class="label rv" style="--i:11" data-t="step3">Наша локация</div>
 
-
-  <div
-    class="label rv"
-    style="--i:8"
-    data-t="step2"
-  >
-    Связаться с нами
-  </div>
-
-
-  <section
-    class="links rv"
-    style="--i:9"
-  >
-
-    <a
-      class="lk"
-      href="tel:+998908292022"
-    >
-
-      <svg viewBox="0 0 24 24">
-        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>
-      </svg>
-
-      <span data-t="c_call">
-        Ресепшен
-      </span>
-
-    </a>
-
-
-    <a
-      class="lk"
-      href="https://t.me/AperolHotel"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <svg viewBox="0 0 24 24">
-        <path d="M21.5 3 2.5 10.6l6.1 2.3 2.3 6.9 3.4-4.2 5 3.7L21.5 3ZM8.6 12.9l9.6-6.4"/>
-      </svg>
-
-      <span>
-        Telegram
-      </span>
-
-    </a>
-
-
-    <a
-      class="lk"
-      href="https://www.instagram.com/aperol.hotel/"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <svg viewBox="0 0 24 24">
-
-        <rect
-          x="3"
-          y="3"
-          width="18"
-          height="18"
-          rx="5"
-        />
-
-        <circle
-          cx="12"
-          cy="12"
-          r="4"
-        />
-
-        <circle
-          cx="17.5"
-          cy="6.5"
-          r=".6"
-        />
-
-      </svg>
-
-      <span>
-        Instagram
-      </span>
-
-    </a>
-
-
-    <a
-      class="lk"
-      href="https://aperol-hotel.uz"
-      target="_blank"
-      rel="noopener"
-    >
-
-      <svg viewBox="0 0 24 24">
-
-        <circle
-          cx="12"
-          cy="12"
-          r="10"
-        />
-
-        <path d="M2 12h20"/>
-
-        <path d="M12 2a15 15 0 0 1 0 20"/>
-
-        <path d="M12 2a15 15 0 0 0 0 20"/>
-
-      </svg>
-
-      <span data-t="c_site">
-        Сайт
-      </span>
-
-    </a>
-
+  <section class="loc rv" style="--i:12">
+    <div class="pin"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+    <p class="addr" data-t="address">Сарыкульская улица, дом 9Г</p>
+    <p class="city" data-t="city">Ташкент</p>
+    <p class="lm-title" data-t="landmarks">Ориентиры</p>
+    <ul>
+      <li data-t="lm1">Американская школа</li>
+      <li data-t="lm2">Железнодорожный институт</li>
+      <li data-t="lm3">Северный вокзал</li>
+    </ul>
+    <a class="route" href="https://yandex.uz/maps/-/CXWRUVnD" target="_blank" rel="noopener" data-t="route">Открыть на карте</a>
   </section>
 
-
-  <p
-    class="thanks rv"
-    style="--i:10"
-  >
-
-    <span data-t="thanks">
-      Спасибо, что выбрали нас
-    </span>
-
-    <small>
-      Aperol Hotel
-    </small>
-
+  <p class="thanks rv" style="--i:13">
+    <span data-t="thanks">Спасибо, что выбрали нас</span>
+    <small>Aperol Hotel</small>
   </p>
 
 </main>
 
-
-<a
-  class="call"
-  href="tel:+998908292022"
->
-
-  <svg viewBox="0 0 24 24">
-
-    <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>
-
-  </svg>
-
-  <span data-t="call">
-    Позвонить на ресепшен
-  </span>
-
+<a class="call" href="tel:+998908292022">
+  <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+  <span data-t="call">Позвонить на ресепшен</span>
 </a>
 
-
 <script>
-
 const T={
-
 ru:{
+offer:"Комфортные номера для деловых поездок и отдыха вдвоём",
+price:"от 250 000 сум",
+promo_title:"Получайте скидки",
+promo_text:"Подпишитесь на наш Telegram-канал",
+promo_btn:"Подписаться",
+step3:"Наша локация",
+address:"Сарыкульская улица, дом 9Г",
+city:"Ташкент",
+landmarks:"Ориентиры",
+lm1:"Американская школа",
+lm2:"Железнодорожный институт",
+lm3:"Северный вокзал",
+route:"Открыть на карте",
 eyebrow:"Добро пожаловать",
 sub:"Расскажите о вашем отдыхе. Ваш отзыв помогает нам становиться лучше, а другим гостям — выбирать нас.",
 step1:"Выберите карту",
@@ -1091,8 +306,20 @@ c_site:"Сайт",
 thanks:"Спасибо, что выбрали нас",
 call:"Позвонить на ресепшен"
 },
-
 uz:{
+offer:"Xizmat safari va ikki kishilik dam olish uchun qulay xonalar",
+price:"250 000 so‘mdan",
+promo_title:"Chegirmalarga ega bo‘ling",
+promo_text:"Telegram kanalimizga obuna bo‘ling",
+promo_btn:"Obuna bo‘lish",
+step3:"Bizning manzil",
+address:"Sariko‘l ko‘chasi, 9G-uy",
+city:"Toshkent",
+landmarks:"Mo‘ljallar",
+lm1:"Amerika maktabi",
+lm2:"Temir yo‘l instituti",
+lm3:"Shimoliy vokzal",
+route:"Xaritada ochish",
 eyebrow:"Xush kelibsiz",
 sub:"Dam olishingiz haqida aytib bering. Sizning fikringiz bizni yaxshilaydi, boshqa mehmonlarga esa tanlashga yordam beradi.",
 step1:"Xaritani tanlang",
@@ -1104,8 +331,20 @@ c_site:"Sayt",
 thanks:"Bizni tanlaganingiz uchun rahmat",
 call:"Qabulga qo‘ng‘iroq qilish"
 },
-
 en:{
+offer:"Comfortable rooms for business trips and getaways for two",
+price:"from 250,000 UZS",
+promo_title:"Get discounts",
+promo_text:"Subscribe to our Telegram channel",
+promo_btn:"Subscribe",
+step3:"Our location",
+address:"9G Sarykulskaya Street",
+city:"Tashkent",
+landmarks:"Landmarks",
+lm1:"American School",
+lm2:"Railway Institute",
+lm3:"North Railway Station",
+route:"Open in maps",
 eyebrow:"Welcome",
 sub:"Tell us about your stay. Your review helps us improve and helps other guests choose us.",
 step1:"Choose a map",
@@ -1117,106 +356,40 @@ c_site:"Website",
 thanks:"Thank you for choosing us",
 call:"Call reception"
 }
-
 };
 
-
 function setLang(l){
-
-const d=T[l]||T.ru;
-
-document.documentElement.lang=l;
-
-document
-.querySelectorAll('[data-t]')
-.forEach(el=>{
-el.textContent=d[el.dataset.t];
-});
-
-document
-.querySelectorAll('#lang button')
-.forEach(b=>{
-b.classList.toggle(
-'on',
-b.dataset.l===l
-);
-});
-
-try{
-localStorage.setItem('ap_lang',l);
-}catch(e){}
-
+  const d=T[l]||T.ru;
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=d[el.dataset.t];});
+  document.querySelectorAll('#lang button').forEach(b=>{b.classList.toggle('on',b.dataset.l===l);});
+  try{localStorage.setItem('ap_lang',l);}catch(e){}
 }
 
-
-document
-.getElementById('lang')
-.addEventListener('click',e=>{
-
-const b=e.target.closest('button');
-
-if(b){
-setLang(b.dataset.l);
-}
-
+document.getElementById('lang').addEventListener('click',e=>{
+  const b=e.target.closest('button');
+  if(b){setLang(b.dataset.l);}
 });
-
 
 let init=null;
-
-try{
-init=localStorage.getItem('ap_lang');
-}catch(e){}
-
-
+try{init=localStorage.getItem('ap_lang');}catch(e){}
 if(!init){
-
-const n=
-(navigator.language||'ru')
-.slice(0,2);
-
-init=T[n]?n:'ru';
-
+  const n=(navigator.language||'ru').slice(0,2);
+  init=T[n]?n:'ru';
 }
-
-
 setLang(init);
 
-
 /* ---------- Gentle parallax ---------- */
-
 (function(){
-
-if(
-matchMedia(
-'(prefers-reduced-motion:reduce)'
-).matches
-){
-return;
-}
-
-const a=document.querySelector('.l1');
-const b=document.querySelector('.l2');
-
-addEventListener(
-'scroll',
-()=>{
-
-const y=scrollY;
-
-a.style.marginTop=
-(y*.12)+'px';
-
-b.style.marginBottom=
-(y*.12)+'px';
-
-},
-{passive:true}
-);
-
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){return;}
+  const a=document.querySelector('.l1');
+  const b=document.querySelector('.l2');
+  addEventListener('scroll',()=>{
+    const y=scrollY;
+    a.style.marginTop=(y*.12)+'px';
+    b.style.marginBottom=(y*.12)+'px';
+  },{passive:true});
 })();
-
 </script>
-
 </body>
 </html>
